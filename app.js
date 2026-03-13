@@ -189,8 +189,8 @@ function App() {
                 key={idx}
                 onClick={() => isReady && setSelectedWinner(p)}
                 className={`flex items-center justify-between p-2 rounded-lg cursor-pointer transition-all ${(match.winner === p || selectedWinner === p)
-                    ? 'bg-emerald-500 text-black font-bold'
-                    : 'bg-zinc-800/50 text-zinc-300'
+                  ? 'bg-emerald-500 text-black font-bold'
+                  : 'bg-zinc-800/50 text-zinc-300'
                   }`}
               >
                 <span className="text-xs truncate w-32">{p || 'TBD'}</span>
@@ -215,7 +215,28 @@ function App() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black p-6">
         <div className="max-w-2xl w-full bg-zinc-900 border border-zinc-800 p-8 rounded-[2rem] shadow-2xl">
-          <h1 className="text-4xl font-black text-white italic tracking-tighter text-center mb-8 uppercase">Registration</h1>
+
+    {/* --- LOGO SECTION (CIRCULAR) --- */}
+          <div className="flex justify-center mb-6">
+            <img
+              src="asset/logo.jpg"
+              alt="Tournament Logo"
+              /* h-32: Sets a fixed height
+                 w-32: Sets a fixed width (making it a perfect square)
+                 rounded-full: Makes the square a circle
+                 object-cover: IMPORTANT! Keeps image from stretching while filling the circle
+                 border-4: Optional border to make it look nicer
+                 border-zinc-800: Border color to match the design
+              */
+              className="h-32 w-32 rounded-full object-cover border-4 border-zinc-800 shadow-xl"
+              onError={function(e) {
+                e.target.src = "https://via.placeholder.com/150";
+              }}
+            />
+          </div>
+
+          <h1 className="text-4xl font-black text-white italic tracking-tighter text-center mb-8 
+          uppercase">Abo-Abo Ml Tournament</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
             {participants.map((p, i) => (
               <div key={i} className="flex items-center bg-black/40 border border-zinc-800 p-1 rounded-xl">

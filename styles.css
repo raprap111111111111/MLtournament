@@ -2,9 +2,10 @@
 .bracket-column {
   display: flex;
   flex-direction: column;
-  justify-content: space-around; /* This centers matches relative to previous round */
+  justify-content: space-around;
   gap: 32px; 
   position: relative;
+  min-width: 200px; /* Ensures columns don't shrink too much */
 }
 
 /* Container for the connector logic */
@@ -12,35 +13,32 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding-right: 40px; /* The length of the horizontal line */
+  padding-right: 40px;
 }
 
-/* 1. The Exit Line: Horizontal line coming out of every match */
+/* 1. The Exit Line */
 .match-container::after {
   content: "";
   position: absolute;
   right: 0;
   top: 50%;
   width: 40px;
-  border-top: 2px solid #3f3f46; /* Zinc-700 */
+  border-top: 2px solid #3f3f46;
   z-index: 1;
 }
 
-/* 2. The Elbow: Vertical line connecting the pair */
-/* We only draw this on the "top" match of every pair (odd children) */
+/* 2. The Elbow */
 .bracket-column .match-container:nth-child(odd):not(:last-child)::before {
   content: "";
   position: absolute;
   right: 0;
   top: 50%;
-  /* This height reaches down to the middle of the next match */
   height: calc(100% + 32px); 
   border-right: 2px solid #3f3f46;
   z-index: 0;
 }
 
-/* 3. Entry Point: Short horizontal line for the next round */
-/* This is optional if your columns are close together, but helps alignment */
+/* 3. Entry Point */
 .bracket-column:not(:first-child) .match-container::before {
   content: "";
   position: absolute;
@@ -50,7 +48,7 @@
   border-top: 2px solid #3f3f46;
 }
 
-/* Hide connectors for the very last column (Grand Finals) */
+/* Hide connectors for the very last column */
 section:last-child .bracket-column .match-container::after,
 section:last-child .bracket-column .match-container::before {
   display: none;
@@ -60,8 +58,8 @@ section:last-child .bracket-column .match-container::before {
 .match-card {
   position: relative;
   z-index: 10;
-  background: #18181b; /* zinc-900 */
-  border: 1px solid #27272a; /* zinc-800 */
+  background: #18181b;
+  border: 1px solid #27272a;
   border-radius: 12px;
   padding: 12px;
   transition: all 0.3s ease;
@@ -70,4 +68,44 @@ section:last-child .bracket-column .match-container::before {
 .winner-glow {
   border-color: #10b981 !important;
   box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+}
+
+/* --- MOBILE RESPONSIVE FIXES --- */
+@media (max-width: 768px) {
+  /* Allow the bracket to scroll sideways instead of breaking */
+  main {
+    padding-left: 10px;
+    padding-right: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Make matches slightly smaller for mobile screens */
+  .match-card {
+    width: 160px !important; /* Forces a consistent width on small screens */
+    padding: 8px;
+  }
+
+  /* Reduce the spacing between rounds so more fits on screen */
+  .bracket-column {
+    gap: 20px;
+    min-width: 160px;
+  }
+
+  .match-container {
+    padding-right: 20px;
+  }
+
+  .match-container::after, 
+  .bracket-column:not(:first-child) .match-container::before {
+    width: 20px;
+  }
+
+  .bracket-column:not(:first-child) .match-container::before {
+    left: -20px;
+  }
+
+  .bracket-column .match-container:nth-child(odd):not(:last-child)::before {
+    height: calc(100% + 20px);
+  }
 }
