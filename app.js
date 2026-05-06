@@ -818,82 +818,82 @@ function App() {
   }
 
   return (
-  <div className="min-h-screen p-4 md:p-8 bg-zinc-950 text-white">
-    {showResetToast && (
-      <div className="fixed top-6 right-6 z-50 w-[360px] max-w-[calc(100vw-2rem)] rounded-2xl border border-rose-500/20 bg-zinc-950 shadow-2xl">
-        <div className="p-5">
-          <div className="flex items-start gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-rose-500/10 text-rose-500">
-              !
-            </div>
+    <div className="min-h-screen p-4 md:p-8 bg-zinc-950 text-white">
+      {showResetToast && (
+        <div className="fixed top-6 right-6 z-50 w-[360px] max-w-[calc(100vw-2rem)] rounded-2xl border border-rose-500/20 bg-zinc-950 shadow-2xl">
+          <div className="p-5">
+            <div className="flex items-start gap-4">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-rose-500/10 text-rose-500">
+                !
+              </div>
 
-            <div className="flex-1">
-              <h3 className="text-sm font-black uppercase tracking-widest text-white">
-                Reset Tournament?
-              </h3>
+              <div className="flex-1">
+                <h3 className="text-sm font-black uppercase tracking-widest text-white">
+                  Reset Tournament?
+                </h3>
 
-              <p className="mt-2 text-xs font-medium leading-relaxed text-zinc-400">
-                This will wipe all tournament data, bracket progress, teams, and undo history.
-              </p>
+                <p className="mt-2 text-xs font-medium leading-relaxed text-zinc-400">
+                  This will wipe all tournament data, bracket progress, teams, and undo history.
+                </p>
 
-              <div className="mt-4 flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => setShowResetToast(false)}
-                  className="flex-1 rounded-xl bg-zinc-800 px-4 py-2 text-xs font-black uppercase tracking-widest text-zinc-300 hover:bg-zinc-700 hover:text-white"
-                >
-                  Cancel
-                </button>
+                <div className="mt-4 flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowResetToast(false)}
+                    className="flex-1 rounded-xl bg-zinc-800 px-4 py-2 text-xs font-black uppercase tracking-widest text-zinc-300 hover:bg-zinc-700 hover:text-white"
+                  >
+                    Cancel
+                  </button>
 
-                <button
-                  type="button"
-                  onClick={confirmResetTournament}
-                  className="flex-1 rounded-xl bg-rose-500 px-4 py-2 text-xs font-black uppercase tracking-widest text-black hover:bg-rose-400"
-                >
-                  Reset
-                </button>
+                  <button
+                    type="button"
+                    onClick={confirmResetTournament}
+                    className="flex-1 rounded-xl bg-rose-500 px-4 py-2 text-xs font-black uppercase tracking-widest text-black hover:bg-rose-400"
+                  >
+                    Reset
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    )}
-    
+      )}
 
-   <header className="flex justify-between items-center mb-12 bg-zinc-900/50 p-6 rounded-3xl border border-zinc-800 max-w-7xl mx-auto">
-  <h2 className="text-2xl font-black tracking-tight uppercase italic">{meta.title}</h2>
 
-  <div className="flex items-center gap-3">
-    <button
-      onClick={() => setZoom(z => Math.max(0.5, z - 0.1))}
-      className="p-2 bg-zinc-800 rounded-lg text-xs font-bold"
-    >
-      -
-    </button>
+      <header className="flex justify-between items-center mb-12 bg-zinc-900/50 p-6 rounded-3xl border border-zinc-800 max-w-7xl mx-auto">
+        <h2 className="text-2xl font-black tracking-tight uppercase italic">{meta.title}</h2>
 
-    <button
-      onClick={() => setZoom(z => Math.min(1.5, z + 0.1))}
-      className="p-2 bg-zinc-800 rounded-lg text-xs font-bold"
-    >
-      +
-    </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setZoom(z => Math.max(0.5, z - 0.1))}
+            className="p-2 bg-zinc-800 rounded-lg text-xs font-bold"
+          >
+            -
+          </button>
 
-    <button
-      onClick={undoLastResult}
-      disabled={bracketHistory.length === 0}
-      className="px-5 py-2 bg-amber-500/10 text-amber-500 border border-amber-500/20 rounded-xl font-bold text-xs disabled:opacity-30 disabled:cursor-not-allowed"
-    >
-      Undo
-    </button>
+          <button
+            onClick={() => setZoom(z => Math.min(1.5, z + 0.1))}
+            className="p-2 bg-zinc-800 rounded-lg text-xs font-bold"
+          >
+            +
+          </button>
 
-    <button
-      onClick={fullReset}
-      className="px-6 py-2 bg-rose-500/10 text-rose-500 border border-rose-500/20 rounded-xl font-bold text-xs"
-    >
-      Reset
-    </button>
-  </div>
-</header>
+          <button
+            onClick={undoLastResult}
+            disabled={bracketHistory.length === 0}
+            className="px-5 py-2 bg-amber-500/10 text-amber-500 border border-amber-500/20 rounded-xl font-bold text-xs disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            Undo
+          </button>
+
+          <button
+            onClick={fullReset}
+            className="px-6 py-2 bg-rose-500/10 text-rose-500 border border-rose-500/20 rounded-xl font-bold text-xs"
+          >
+            Reset
+          </button>
+        </div>
+      </header>
 
       <main>
         <BracketTabs />
